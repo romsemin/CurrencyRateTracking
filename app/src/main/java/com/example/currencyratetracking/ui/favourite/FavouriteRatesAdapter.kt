@@ -5,8 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.currencyratetracking.R
 import com.example.currencyratetracking.datamodels.FavouriteRateDB
-import com.example.currencyratetracking.databinding.RatesFavouriteItemBinding
+import com.example.currencyratetracking.databinding.RatesItemBinding
 
 class FavouriteRatesAdapter : ListAdapter<FavouriteRateDB, FavouriteRatesAdapter.RatesViewHolder>(
     RatesDiffUtil
@@ -34,7 +35,7 @@ class FavouriteRatesAdapter : ListAdapter<FavouriteRateDB, FavouriteRatesAdapter
         parent: ViewGroup,
         viewType: Int
     ): RatesViewHolder {
-        val binding = RatesFavouriteItemBinding.inflate(
+        val binding = RatesItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -51,11 +52,12 @@ class FavouriteRatesAdapter : ListAdapter<FavouriteRateDB, FavouriteRatesAdapter
         return ratesList.size
     }
 
-    inner class RatesViewHolder(private val binding: RatesFavouriteItemBinding) :
+    inner class RatesViewHolder(private val binding: RatesItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: FavouriteRateDB) {
-            binding.ratesFavouriteItemCode.text = item.code
-            binding.ratesFavouriteItemRate.text = item.rate.toString()
+            binding.ratesItemCode.text = item.code
+            binding.ratesItemRate.text = item.rate.toString()
+            binding.ratesItemIcon.setImageResource(R.drawable.ic_baseline_star_rate_24)
         }
     }
 }

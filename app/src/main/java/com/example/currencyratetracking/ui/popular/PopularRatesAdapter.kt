@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.currencyratetracking.R
 import com.example.currencyratetracking.datamodels.Rate
 import com.example.currencyratetracking.databinding.RatesItemBinding
 
@@ -55,6 +56,7 @@ class PopularRatesAdapter(
         fun bind(item: Rate) {
             binding.ratesItemCode.text = item.code
             binding.ratesItemRate.text = item.rate.toString()
+            binding.ratesItemIcon.setImageResource(R.drawable.ic_baseline_star_outline_24)
         }
     }
 

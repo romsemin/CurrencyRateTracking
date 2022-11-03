@@ -13,11 +13,11 @@ import com.example.currencyratetracking.R
 import com.example.currencyratetracking.utils.Currency
 import com.example.currencyratetracking.datamodels.FavouriteRateDB
 import com.example.currencyratetracking.datamodels.Rate
-import com.example.currencyratetracking.datamodels.RateApiResponse
 import com.example.currencyratetracking.databinding.FragmentPopularRatesBinding
 import com.example.currencyratetracking.ui.RatesViewModel
 import com.example.currencyratetracking.utils.ApiState
 import com.example.currencyratetracking.utils.SortOption
+import com.example.currencyratetracking.datamodels.RateApiResponse
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
