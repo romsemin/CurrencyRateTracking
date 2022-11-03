@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">CurrencyRateTracking</string>
+    <string name="popular">Popular</string>
+    <string name="favourite">Favourite</string>
+    <string name="title_popular">Popular currency rates</string>
+    <string name="title_favourite">Favourite currency rates</string>
+
+    <!--Sort Options-->
+    <string name="none">Not sorted</string>
+    <string name="by_rate">By rate ASC</string>
+    <string name="by_rate_descending">By rate DESC</string>
+    <string name="by_code">By code ASC</string>
+    <string name="by_code_descending">By code DESC</string>
+
+    <!--Currencies-->
+    <string name="cad">CAD</string>
+    <string name="hkd">HKD</string>
+    <string name="btc">BTC</string>
+    <string name="isk">ISK</string>
+    <string name="php">PHP</string>
+    <string name="dkk">DKK</string>
+    <string name="huf">HUF</string>
+    <string name="czk">CZK</string>
+    <string name="aud">AUD</string>
+    <string name="ron">RON</string>
+    <string name="sek">SEK</string>
+    <string name="idr">IDR</string>
+    <string name="inr">INR</string>
+    <string name="brl">BRL</string>
+    <string name="rub">RUB</string>
+    <string name="hrk">HRK</string>
+    <string name="jpy">JPY</string>
+    <string name="thb">THB</string>
+    <string name="chf">CHF</string>
+    <string name="sgd">SGD</string>
+    <string name="pln">PLN</string>
+    <string name="bgn">BGN</string>
+    <string name="cny">CNY</string>
+    <string name="nok">NOK</string>
+    <string name="nzd">NZD</string>
+    <string name="zar">ZAR</string>
+    <string name="usd">USD</string>
+    <string name="mxn">MXN</string>
+    <string name="ils">ILS</string>
+    <string name="gbp">GBP</string>
+    <string name="krw">KRW</string>
+    <string name="eur">EUR</string>
+</resources>
