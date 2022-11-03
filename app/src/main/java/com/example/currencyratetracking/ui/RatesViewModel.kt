@@ -42,7 +42,7 @@ class RatesViewModel @Inject constructor(
         }
     }
 
-    fun addToFavourite(favouriteRate: FavouriteRate) {
+    fun insert(favouriteRate: FavouriteRate) {
         scope.launch(dispatcher) {
             ratesRepository.insert(favouriteRate)
         }

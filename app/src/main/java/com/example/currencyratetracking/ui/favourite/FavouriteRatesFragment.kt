@@ -17,7 +17,7 @@ import com.example.currencyratetracking.utils.SortOption
 class FavouriteRatesFragment : Fragment() {
 
     private var _ratesSpinnerAdapter: ArrayAdapter<String>? = null
-    val ratesSpinnerAdapter: ArrayAdapter<String> get () = _ratesSpinnerAdapter!!
+    private val ratesSpinnerAdapter: ArrayAdapter<String> get() = _ratesSpinnerAdapter!!
 
     private var _sortSpinnerAdapter: ArrayAdapter<String>? = null
     private val sortSpinnerAdapter: ArrayAdapter<String>  get() = _sortSpinnerAdapter!!
@@ -86,8 +86,6 @@ class FavouriteRatesFragment : Fragment() {
                 }
             }
 
-
-
         favouriteRatesViewModel.favouriteRatesLiveData.observe(viewLifecycleOwner) {
             adapter.setData(it)
         }
@@ -96,6 +94,8 @@ class FavouriteRatesFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        _adapter = null
+        _ratesSpinnerAdapter = null
+        _sortSpinnerAdapter = null
     }
-
 }

@@ -24,7 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class PopularRatesFragment : Fragment() {
 
     private var _ratesSpinnerAdapter: ArrayAdapter<String>? = null
-    val ratesSpinnerAdapter: ArrayAdapter<String> get () = _ratesSpinnerAdapter!!
+    private val ratesSpinnerAdapter: ArrayAdapter<String> get () = _ratesSpinnerAdapter!!
 
     private var _sortSpinnerAdapter: ArrayAdapter<String>? = null
     private val sortSpinnerAdapter: ArrayAdapter<String>  get() = _sortSpinnerAdapter!!
@@ -46,7 +46,7 @@ class PopularRatesFragment : Fragment() {
         _binding = FragmentPopularRatesBinding.inflate(inflater, container, false)
 
         _adapter = PopularRatesAdapter(PopularRatesAdapter.OnClickListener {
-            popularRatesViewModel.addToFavourite(
+            popularRatesViewModel.insert(
                     FavouriteRate(
                         code = it.code,
                         rate = it.rate
@@ -115,6 +115,8 @@ class PopularRatesFragment : Fragment() {
         super.onDestroyView()
         _binding = null
         _adapter = null
+        _ratesSpinnerAdapter = null
+        _sortSpinnerAdapter = null
     }
 
     private fun observeRates() {
@@ -152,11 +154,10 @@ class PopularRatesFragment : Fragment() {
         for (rate in response.rates) {
             adapterList.add(Rate("${response.base}/${rate.key}", rate.value))
         }
-
         return adapterList
     }
 
-    fun sortByOption(adapterList: MutableList<Rate>, sortOptionOptionId: SortOption): List<Rate> {
+    private fun sortByOption(adapterList: MutableList<Rate>, sortOptionOptionId: SortOption): List<Rate> {
         return when (sortOptionOptionId) {
             SortOption.BY_RATE_ASC -> adapterList.sortedBy { it.rate }
             SortOption.BY_RATE_DESC -> adapterList.sortedByDescending { it.rate }
