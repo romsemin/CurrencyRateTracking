@@ -31,6 +31,5 @@ enum class SortOption {
                 else -> NONE
             }
         }
-
     }
 }

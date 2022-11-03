@@ -2,7 +2,7 @@ package com.example.currencyratetracking.datamodels
 
 import com.google.gson.annotations.SerializedName
 
-data class RatesApiResponse(
+data class RateApiResponse(
     @SerializedName("rates")
     val rates: Map<String, Double>,
     @SerializedName("base")

@@ -1,10 +1,9 @@
 package com.example.currencyratetracking.ui
 
 import androidx.lifecycle.*
-import com.example.currencyratetracking.dao.FavouriteRate
-import com.example.currencyratetracking.datamodels.RatesApiResponse
+import com.example.currencyratetracking.datamodels.FavouriteRateDB
+import com.example.currencyratetracking.datamodels.Rate
 import com.example.currencyratetracking.utils.ApiState
-import com.example.currencyratetracking.utils.Const
 import com.example.currencyratetracking.utils.SortOption
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -24,27 +23,23 @@ class RatesViewModel @Inject constructor(
 
     val ratesStateFlow: MutableStateFlow<ApiState> = MutableStateFlow(ApiState.Empty)
 
-    private var _responseApiLiveData: MutableLiveData<RatesApiResponse> = MutableLiveData()
-    val responseApiLiveData: MutableLiveData<RatesApiResponse> = _responseApiLiveData
+    private var _ratesLiveData: MutableLiveData<List<Rate>> = MutableLiveData()
+    val ratesLiveData: MutableLiveData<List<Rate>> = _ratesLiveData
 
-    val favouriteRatesLiveData: LiveData<List<FavouriteRate>> = ratesRepository.getFavouriteRates()
+    val ratesLiveDataDB: LiveData<List<FavouriteRateDB>> = ratesRepository.getFavouriteRates()
 
-    init {
-        getBaseRates(Const.BASE_CURRENCY)
-    }
-
-    fun getBaseRates(base: String) {
+    fun getRates(base: String) {
         scope.launch(dispatcher) {
             ratesStateFlow.value = ApiState.Loading
-            ratesRepository.getBaseRates(base)
+            ratesRepository.getRates(base)
                 .catch { e -> ratesStateFlow.value = ApiState.Failure(e) }
                 .collect { ratesStateFlow.value = ApiState.Success(it) }
         }
     }
 
-    fun insert(favouriteRate: FavouriteRate) {
+    fun insert(favouriteRateDB: FavouriteRateDB) {
         scope.launch(dispatcher) {
-            ratesRepository.insert(favouriteRate)
+            ratesRepository.insert(favouriteRateDB)
         }
     }
 

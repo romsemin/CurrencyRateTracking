@@ -1,6 +1,5 @@
 package com.example.currencyratetracking.ui.popular
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil

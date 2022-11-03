@@ -44,12 +44,14 @@ class FavouriteRatesFragment : Fragment() {
             android.R.layout.simple_spinner_item,
             Currency.getCodes(requireContext())
         )
+        binding.favouriteRatesSpinner.adapter = ratesSpinnerAdapter
 
         _sortSpinnerAdapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_spinner_item,
             SortOption.getSortOptions(requireContext())
         )
+        binding.favouriteSortSpinner.adapter = sortSpinnerAdapter
 
         val recyclerView = binding.favouriteRatesRecyclerView
         recyclerView.setHasFixedSize(true)
@@ -60,7 +62,6 @@ class FavouriteRatesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.favouriteRatesSpinner.adapter = ratesSpinnerAdapter
 
         binding.favouriteRatesSpinner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
@@ -73,8 +74,6 @@ class FavouriteRatesFragment : Fragment() {
                 }
             }
 
-        binding.favouriteSortSpinner.adapter = sortSpinnerAdapter
-
         binding.favouriteSortSpinner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
@@ -86,7 +85,7 @@ class FavouriteRatesFragment : Fragment() {
                 }
             }
 
-        favouriteRatesViewModel.favouriteRatesLiveData.observe(viewLifecycleOwner) {
+        favouriteRatesViewModel.ratesLiveDataDB.observe(viewLifecycleOwner) {
             adapter.setData(it)
         }
     }

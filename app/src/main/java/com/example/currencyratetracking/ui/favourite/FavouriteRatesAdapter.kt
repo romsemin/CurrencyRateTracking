@@ -1,32 +1,31 @@
 package com.example.currencyratetracking.ui.favourite
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.currencyratetracking.dao.FavouriteRate
+import com.example.currencyratetracking.datamodels.FavouriteRateDB
 import com.example.currencyratetracking.databinding.RatesFavouriteItemBinding
 
-class FavouriteRatesAdapter : ListAdapter<FavouriteRate, FavouriteRatesAdapter.RatesViewHolder>(
+class FavouriteRatesAdapter : ListAdapter<FavouriteRateDB, FavouriteRatesAdapter.RatesViewHolder>(
     RatesDiffUtil
 ) {
-    private var favouriteRatesList: MutableList<FavouriteRate> = mutableListOf()
+    private var ratesList: MutableList<FavouriteRateDB> = mutableListOf()
 
-    companion object RatesDiffUtil : DiffUtil.ItemCallback<FavouriteRate>() {
-        override fun areItemsTheSame(oldItem: FavouriteRate, newItem: FavouriteRate): Boolean {
+    companion object RatesDiffUtil : DiffUtil.ItemCallback<FavouriteRateDB>() {
+        override fun areItemsTheSame(oldItem: FavouriteRateDB, newItem: FavouriteRateDB): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: FavouriteRate, newItem: FavouriteRate): Boolean {
+        override fun areContentsTheSame(oldItem: FavouriteRateDB, newItem: FavouriteRateDB): Boolean {
             return oldItem.code == newItem.code
         }
     }
 
-    fun setData(items: List<FavouriteRate>) {
-        favouriteRatesList.clear()
-        favouriteRatesList.addAll(items)
+    fun setData(items: List<FavouriteRateDB>) {
+        ratesList.clear()
+        ratesList.addAll(items)
         notifyDataSetChanged()
     }
 
@@ -44,17 +43,17 @@ class FavouriteRatesAdapter : ListAdapter<FavouriteRate, FavouriteRatesAdapter.R
     }
 
     override fun onBindViewHolder(holder: RatesViewHolder, position: Int) {
-        val item = favouriteRatesList[position]
+        val item = ratesList[position]
         holder.bind(item)
     }
 
     override fun getItemCount(): Int {
-        return favouriteRatesList.size
+        return ratesList.size
     }
 
     inner class RatesViewHolder(private val binding: RatesFavouriteItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: FavouriteRate) {
+        fun bind(item: FavouriteRateDB) {
             binding.ratesFavouriteItemCode.text = item.code
             binding.ratesFavouriteItemRate.text = item.rate.toString()
         }

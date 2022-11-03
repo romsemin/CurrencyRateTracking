@@ -2,10 +2,10 @@ package com.example.currencyratetracking.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.currencyratetracking.dao.FavouriteRate
-import com.example.currencyratetracking.dao.FavouriteRatesDao
-import com.example.currencyratetracking.datamodels.RatesApiResponse
-import com.example.currencyratetracking.utils.NetworkManager
+import com.example.currencyratetracking.datamodels.FavouriteRateDB
+import com.example.currencyratetracking.data.local.FavouriteRatesDao
+import com.example.currencyratetracking.datamodels.RateApiResponse
+import com.example.currencyratetracking.data.remote.RatesRemoteData
 import com.example.currencyratetracking.utils.SortOption
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -13,40 +13,40 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class RatesRepository @Inject constructor(
+    private val ratesRemoteData: RatesRemoteData,
     private val favouriteRatesDao: FavouriteRatesDao
 ) {
-    private var favouriteRates: MutableLiveData<List<FavouriteRate>> = MutableLiveData()
+    private var ratesDB: MutableLiveData<List<FavouriteRateDB>> = MutableLiveData()
 
-    @Inject
-    lateinit var networkManager: NetworkManager
+    fun getFavouriteRates(): LiveData<List<FavouriteRateDB>> = ratesDB
 
-    fun getFavouriteRates(): LiveData<List<FavouriteRate>> = favouriteRates
-
-    suspend fun getBaseRates(base: String): Flow<RatesApiResponse> = flow {
-        emit(networkManager.ratesService.getBaseRates(base))
+    suspend fun getRates(base: String): Flow<RateApiResponse> = flow {
+        emit(ratesRemoteData.getRates(base))
     }.flowOn(Dispatchers.IO)
 
-    suspend fun insert(favouriteRate: FavouriteRate) {
-        return favouriteRatesDao.insert(favouriteRate)
+    suspend fun insert(favouriteRateDB: FavouriteRateDB) {
+        return favouriteRatesDao.insert(favouriteRateDB)
     }
 
     suspend fun sortBy(sortOption: SortOption) {
         withContext(Dispatchers.IO) {
             when (sortOption) {
-                SortOption.BY_RATE_ASC -> favouriteRates.postValue(favouriteRatesDao.sortByRateAsc())
-                SortOption.BY_RATE_DESC -> favouriteRates.postValue(favouriteRatesDao.sortByCodeAsc())
-                SortOption.BY_CODE_ASC -> favouriteRates.postValue(favouriteRatesDao.sortByCodeAsc())
-                SortOption.BY_CODE_DESC -> favouriteRates.postValue(favouriteRatesDao.sortByCodeDesc())
-                else -> favouriteRates.postValue(favouriteRatesDao.getAll())
+                SortOption.BY_RATE_ASC -> ratesDB.postValue(favouriteRatesDao.sortByRateAsc())
+                SortOption.BY_RATE_DESC -> ratesDB.postValue(favouriteRatesDao.sortByCodeAsc())
+                SortOption.BY_CODE_ASC -> ratesDB.postValue(favouriteRatesDao.sortByCodeAsc())
+                SortOption.BY_CODE_DESC -> ratesDB.postValue(favouriteRatesDao.sortByCodeDesc())
+                else -> ratesDB.postValue(favouriteRatesDao.getFavouriteRates())
             }
         }
     }
 
     suspend fun filterByCode(code: String) {
         withContext(Dispatchers.IO) {
-            favouriteRates.postValue(favouriteRatesDao.filterByCode(code))
+            ratesDB.postValue(favouriteRatesDao.filterByCode(code))
         }
     }
 }
