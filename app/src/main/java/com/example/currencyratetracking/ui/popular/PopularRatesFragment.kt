@@ -147,7 +147,7 @@ class PopularRatesFragment : Fragment() {
                     }
                     is ApiState.Failure -> {
                         binding.loading.visibility = View.GONE
-                        binding.error.text = it.msg.localizedMessage
+                        binding.error.text = it.message.localizedMessage
                         binding.error.visibility = View.VISIBLE
                     }
                     is ApiState.Empty -> {
