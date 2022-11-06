@@ -1,8 +1,7 @@
+# Currency rates app.
 
 
-https://user-images.githubusercontent.com/99338011/199834251-c7b1caf9-d303-4baa-b773-83a41c8d750d.mp4
+https://user-images.githubusercontent.com/99338011/200174684-112f8bc4-2aa4-4433-83fa-0fc9cc4da7e0.mp4
 
-# CurrencyRateTracking
 
-Currency rates app.
 Develop stack: MVVM-Retrofit-Coroutines-Flow-Room-Hilt
