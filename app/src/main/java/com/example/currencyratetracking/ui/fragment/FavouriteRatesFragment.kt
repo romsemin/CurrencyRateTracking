@@ -29,7 +29,7 @@ class FavouriteRatesFragment : Fragment() {
     private var _adapter: RatesAdapter? = null
     private val adapter: RatesAdapter get() = _adapter!!
 
-    private val favouriteRatesViewModel: RatesViewModel by hiltNavGraphViewModels(R.id.rates_navigation)
+    private val ratesViewModel: RatesViewModel by hiltNavGraphViewModels(R.id.rates_navigation)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,7 +65,7 @@ class FavouriteRatesFragment : Fragment() {
         binding.favouriteRatesRateSpinner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                    favouriteRatesViewModel.getRatesDBByCode(rateSpinnerAdapter.getItem(p2).toString())
+                    ratesViewModel.getRatesDBByCode(rateSpinnerAdapter.getItem(p2).toString())
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -76,7 +76,7 @@ class FavouriteRatesFragment : Fragment() {
         binding.favouriteRatesSortSpinner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                    favouriteRatesViewModel.getRatesDB(SortOption.getSortOption(p2))
+                    ratesViewModel.getRatesDB(SortOption.getSortOption(p2))
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -84,7 +84,7 @@ class FavouriteRatesFragment : Fragment() {
                 }
             }
 
-        favouriteRatesViewModel.ratesDBLiveData.observe(viewLifecycleOwner) {
+        ratesViewModel.ratesDBLiveData.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
     }

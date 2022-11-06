@@ -35,7 +35,7 @@ class PopularRatesFragment : Fragment() {
     private var _adapter: RatesAdapter? = null
     private val adapter: RatesAdapter get() = _adapter!!
 
-    private val popularRatesViewModel: RatesViewModel by hiltNavGraphViewModels(R.id.rates_navigation)
+    private val ratesViewModel: RatesViewModel by hiltNavGraphViewModels(R.id.rates_navigation)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,7 +44,7 @@ class PopularRatesFragment : Fragment() {
     ): View {
         _binding = FragmentPopularRatesBinding.inflate(inflater, container, false)
         _adapter = RatesAdapter(RatesAdapter.OnClickListener {
-            popularRatesViewModel.insert(
+            ratesViewModel.insert(
                 Rate(it.code, it.rate)
             )
         })
@@ -74,7 +74,7 @@ class PopularRatesFragment : Fragment() {
 
         binding.popularRatesRateSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                popularRatesViewModel.getRates(rateSpinnerAdapter.getItem(p2).toString())
+                ratesViewModel.getRates(rateSpinnerAdapter.getItem(p2).toString())
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -86,10 +86,10 @@ class PopularRatesFragment : Fragment() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
                 viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-                    popularRatesViewModel.ratesStateFlow.collect {
+                    ratesViewModel.ratesStateFlow.collect {
 
                         if (it is ApiState.Success) {
-                            popularRatesViewModel.ratesLiveData.postValue(
+                            ratesViewModel.ratesLiveData.postValue(
                                 mapApiResponseToAdapterData(
                                     it.data,
                                     SortOption.getSortOption(p2)
@@ -105,7 +105,7 @@ class PopularRatesFragment : Fragment() {
             }
         }
 
-        popularRatesViewModel.ratesLiveData.observe(viewLifecycleOwner) {
+        ratesViewModel.ratesLiveData.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
 
@@ -122,10 +122,10 @@ class PopularRatesFragment : Fragment() {
 
     private fun observeRates() {
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-            popularRatesViewModel.ratesStateFlow.collect {
+            ratesViewModel.ratesStateFlow.collect {
                 when (it) {
                     is ApiState.Success -> {
-                        popularRatesViewModel.ratesLiveData.postValue(
+                        ratesViewModel.ratesLiveData.postValue(
                             mapApiResponseToAdapterData(
                                 it.data,
                             SortOption.BY_CODE_ASC)
