@@ -4,31 +4,31 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.currencyratetracking.datamodels.FavouriteRateDB
+import com.example.currencyratetracking.datamodel.Rate
 
 @Database(
-    entities = [FavouriteRateDB::class],
+    entities = [Rate::class],
     version = 1
 )
 
-abstract class FavouriteRatesRoomDatabase : RoomDatabase() {
+abstract class RatesRoomDatabase : RoomDatabase() {
 
-    abstract fun favouriteRatesDao(): FavouriteRatesDao
+    abstract fun favouriteRatesDao(): RatesDao
 
     companion object {
         @Volatile
-        private var INSTANCE: FavouriteRatesRoomDatabase? = null
+        private var INSTANCE: RatesRoomDatabase? = null
 
         fun getDatabase(
             context: Context
-        ): FavouriteRatesRoomDatabase {
+        ): RatesRoomDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    FavouriteRatesRoomDatabase::class.java,
+                    RatesRoomDatabase::class.java,
                     "favourite_rates_room_database"
-                )
-                    .build()
+                ).build()
+
                 INSTANCE = instance
                 return instance
             }

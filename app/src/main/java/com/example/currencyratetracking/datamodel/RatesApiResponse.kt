@@ -1,6 +1,6 @@
-package com.example.currencyratetracking.datamodels
+package com.example.currencyratetracking.datamodel
 
-data class RateApiResponse(
+data class RatesApiResponse(
     val rates: Map<String, Double>,
     val base: String,
     val date: String

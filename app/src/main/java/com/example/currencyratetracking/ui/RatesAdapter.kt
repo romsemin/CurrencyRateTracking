@@ -1,4 +1,4 @@
-package com.example.currencyratetracking.ui.popular
+package com.example.currencyratetracking.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,28 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.currencyratetracking.R
-import com.example.currencyratetracking.datamodels.Rate
 import com.example.currencyratetracking.databinding.RateItemBinding
+import com.example.currencyratetracking.datamodel.Rate
 
-class PopularRatesAdapter(private val onClickListener: OnClickListener) :
-    ListAdapter<Rate, PopularRatesAdapter.RatesViewHolder>(RatesDiffUtil) {
-    private var ratesList : MutableList<Rate> = mutableListOf()
-
-    companion object RatesDiffUtil : DiffUtil.ItemCallback<Rate>() {
-        override fun areItemsTheSame(oldItem: Rate, newItem: Rate): Boolean {
-            return oldItem == newItem
-        }
-
-        override fun areContentsTheSame(oldItem: Rate, newItem: Rate): Boolean {
-            return oldItem.code == newItem.code
-        }
-    }
-
-    fun setData(items: List<Rate>) {
-        ratesList.clear()
-        ratesList.addAll(items)
-        notifyDataSetChanged()
-    }
+class RatesAdapter(private val onClickListener: OnClickListener? = null) :
+    ListAdapter<Rate, RatesAdapter.RatesViewHolder>(RatesDiffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RatesViewHolder {
         val binding = RateItemBinding.inflate(
@@ -39,15 +22,11 @@ class PopularRatesAdapter(private val onClickListener: OnClickListener) :
     }
 
     override fun onBindViewHolder(holder: RatesViewHolder, position: Int) {
-        val item = ratesList[position]
+        val item = getItem(position)
         holder.itemView.setOnClickListener{
-            onClickListener.onClick(item)
+            onClickListener?.onClick(item)
         }
         holder.bind(item)
-    }
-
-    override fun getItemCount(): Int {
-        return ratesList.size
     }
 
     inner class RatesViewHolder(private val binding: RateItemBinding) :
@@ -55,11 +34,21 @@ class PopularRatesAdapter(private val onClickListener: OnClickListener) :
         fun bind(item: Rate) {
             binding.rateItemCode.text = item.code
             binding.rateItemRate.text = item.rate.toString()
-            binding.rateItemIcon.setImageResource(R.drawable.ic_baseline_star_outline)
+            binding.rateItemIcon.setImageResource(R.drawable.ic_baseline_star_rate)
         }
     }
 
     class OnClickListener(val clickListener: (rate: Rate) -> Unit) {
         fun onClick(rate: Rate) = clickListener(rate)
+    }
+
+    companion object RatesDiffUtil : DiffUtil.ItemCallback<Rate>() {
+        override fun areItemsTheSame(oldItem: Rate, newItem: Rate): Boolean {
+            return oldItem == newItem
+        }
+
+        override fun areContentsTheSame(oldItem: Rate, newItem: Rate): Boolean {
+            return oldItem.code == newItem.code
+        }
     }
 }

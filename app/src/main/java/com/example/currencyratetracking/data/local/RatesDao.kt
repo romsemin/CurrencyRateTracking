@@ -4,33 +4,32 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.currencyratetracking.datamodels.FavouriteRateDB
+import com.example.currencyratetracking.datamodel.Rate
 
 @Dao
-interface FavouriteRatesDao {
+interface RatesDao {
 
     @Query("SELECT * FROM favourite_rates_table")
-    fun getAll(): List<FavouriteRateDB>
+    fun getAll(): List<Rate>
 
     @Query("DELETE FROM favourite_rates_table")
     suspend fun deleteAll()
 
     @Query("SELECT * FROM favourite_rates_table WHERE code LIKE '%' || :code || '%' ")
-    fun filterByCode(code: String): List<FavouriteRateDB>
+    fun getByCode(code: String): List<Rate>
 
     @Query("SELECT * FROM favourite_rates_table ORDER BY code ASC")
-    fun sortByCodeAsc(): List<FavouriteRateDB>
+    fun sortByCodeAsc(): List<Rate>
 
     @Query("SELECT * FROM favourite_rates_table ORDER BY code DESC")
-    fun sortByCodeDesc(): List<FavouriteRateDB>
+    fun sortByCodeDesc(): List<Rate>
 
     @Query("SELECT * FROM favourite_rates_table ORDER BY rate ASC")
-    fun sortByRateAsc(): List<FavouriteRateDB>
+    fun sortByRateAsc(): List<Rate>
 
     @Query("SELECT * FROM favourite_rates_table ORDER BY rate DESC")
-    fun sortByRateDesc(): List<FavouriteRateDB>
+    fun sortByRateDesc(): List<Rate>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(favouriteRateDB: FavouriteRateDB)
-
+    suspend fun insert(favouriteRateDB: Rate)
 }

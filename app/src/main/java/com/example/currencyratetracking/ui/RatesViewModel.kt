@@ -1,8 +1,7 @@
 package com.example.currencyratetracking.ui
 
 import androidx.lifecycle.*
-import com.example.currencyratetracking.datamodels.FavouriteRateDB
-import com.example.currencyratetracking.datamodels.Rate
+import com.example.currencyratetracking.datamodel.Rate
 import com.example.currencyratetracking.util.ApiState
 import com.example.currencyratetracking.util.SortOption
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,7 +25,7 @@ class RatesViewModel @Inject constructor(
     private var _ratesLiveData: MutableLiveData<List<Rate>> = MutableLiveData()
     val ratesLiveData: MutableLiveData<List<Rate>> = _ratesLiveData
 
-    val ratesLiveDataDB: LiveData<List<FavouriteRateDB>> = ratesRepository.getFavouriteRates()
+    val ratesDBLiveData: LiveData<List<Rate>> = ratesRepository.getRatesDB()
 
     fun getRates(base: String) {
         scope.launch(dispatcher) {
@@ -37,21 +36,21 @@ class RatesViewModel @Inject constructor(
         }
     }
 
-    fun insert(favouriteRateDB: FavouriteRateDB) {
+    fun insert(rate: Rate) {
         scope.launch(dispatcher) {
-            ratesRepository.insert(favouriteRateDB)
+            ratesRepository.insert(rate)
         }
     }
 
-    fun getFavouriteRates(sortOption: SortOption) {
+    fun getRatesDB(sortOption: SortOption) {
         scope.launch(dispatcher) {
             ratesRepository.sortBy(sortOption)
         }
     }
 
-    fun getFilteredFavouriteRates(code: String) {
+    fun getRatesDBByCode(code: String) {
         scope.launch(dispatcher) {
-            ratesRepository.filterByCode(code)
+            ratesRepository.getRatesDBByCode(code)
         }
     }
 }

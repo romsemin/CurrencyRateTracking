@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/navigation_popular"
-        android:name="com.example.currencyratetracking.ui.popular.PopularRatesFragment"
+        android:name="com.example.currencyratetracking.ui.fragment.PopularRatesFragment"
         android:label="@string/title_popular"
         tools:layout="@layout/fragment_popular_rates" />
 
     <fragment
         android:id="@+id/navigation_favourite"
-        android:name="com.example.currencyratetracking.ui.favourite.FavouriteRatesFragment"
+        android:name="com.example.currencyratetracking.ui.fragment.FavouriteRatesFragment"
         android:label="@string/title_favourite"
         tools:layout="@layout/fragment_favourite_rates" />
 
