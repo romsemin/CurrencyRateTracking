@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.currencyratetracking.R
 import com.example.currencyratetracking.datamodels.Rate
-import com.example.currencyratetracking.databinding.RatesItemBinding
+import com.example.currencyratetracking.databinding.RateItemBinding
 
 class PopularRatesAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<Rate, PopularRatesAdapter.RatesViewHolder>(RatesDiffUtil) {
@@ -30,7 +30,7 @@ class PopularRatesAdapter(private val onClickListener: OnClickListener) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RatesViewHolder {
-        val binding = RatesItemBinding.inflate(
+        val binding = RateItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -50,12 +50,12 @@ class PopularRatesAdapter(private val onClickListener: OnClickListener) :
         return ratesList.size
     }
 
-    inner class RatesViewHolder(private val binding: RatesItemBinding) :
+    inner class RatesViewHolder(private val binding: RateItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Rate) {
-            binding.ratesItemCode.text = item.code
-            binding.ratesItemRate.text = item.rate.toString()
-            binding.ratesItemIcon.setImageResource(R.drawable.ic_baseline_star_outline)
+            binding.rateItemCode.text = item.code
+            binding.rateItemRate.text = item.rate.toString()
+            binding.rateItemIcon.setImageResource(R.drawable.ic_baseline_star_outline)
         }
     }
 

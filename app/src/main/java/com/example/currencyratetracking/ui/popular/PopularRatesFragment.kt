@@ -10,21 +10,21 @@ import androidx.fragment.app.Fragment
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.currencyratetracking.R
-import com.example.currencyratetracking.utils.Currency
+import com.example.currencyratetracking.util.Code
 import com.example.currencyratetracking.datamodels.FavouriteRateDB
 import com.example.currencyratetracking.datamodels.Rate
 import com.example.currencyratetracking.databinding.FragmentPopularRatesBinding
 import com.example.currencyratetracking.ui.RatesViewModel
-import com.example.currencyratetracking.utils.ApiState
-import com.example.currencyratetracking.utils.SortOption
+import com.example.currencyratetracking.util.ApiState
+import com.example.currencyratetracking.util.SortOption
 import com.example.currencyratetracking.datamodels.RateApiResponse
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class PopularRatesFragment : Fragment() {
 
-    private var _ratesSpinnerAdapter: ArrayAdapter<String>? = null
-    private val ratesSpinnerAdapter: ArrayAdapter<String> get() = _ratesSpinnerAdapter!!
+    private var _rateSpinnerAdapter: ArrayAdapter<String>? = null
+    private val rateSpinnerAdapter: ArrayAdapter<String> get() = _rateSpinnerAdapter!!
 
     private var _sortSpinnerAdapter: ArrayAdapter<String>? = null
     private val sortSpinnerAdapter: ArrayAdapter<String> get() = _sortSpinnerAdapter!!
@@ -52,21 +52,21 @@ class PopularRatesFragment : Fragment() {
             )
         })
 
-        _ratesSpinnerAdapter = ArrayAdapter(
+        _rateSpinnerAdapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_spinner_item,
-            Currency.getCodes(requireContext())
+            Code.getCodes(requireContext())
         )
-        binding.ratesSpinner.adapter = ratesSpinnerAdapter
+        binding.popularRateSpinner.adapter = rateSpinnerAdapter
 
         _sortSpinnerAdapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_spinner_item,
             SortOption.getSortOptions(requireContext())
         )
-        binding.sortSpinner.adapter = sortSpinnerAdapter
+        binding.popularSortSpinner.adapter = sortSpinnerAdapter
 
-        val recyclerView = binding.popularRatesRecyclerView
+        val recyclerView = binding.popularRateRecyclerView
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
         return binding.root
@@ -75,9 +75,9 @@ class PopularRatesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.ratesSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        binding.popularRateSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                popularRatesViewModel.getRates(ratesSpinnerAdapter.getItem(p2).toString())
+                popularRatesViewModel.getRates(rateSpinnerAdapter.getItem(p2).toString())
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -85,7 +85,7 @@ class PopularRatesFragment : Fragment() {
             }
         }
 
-        binding.sortSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        binding.popularSortSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
                 viewLifecycleOwner.lifecycleScope.launchWhenCreated {
@@ -121,7 +121,7 @@ class PopularRatesFragment : Fragment() {
         super.onDestroyView()
         _binding = null
         _adapter = null
-        _ratesSpinnerAdapter = null
+        _rateSpinnerAdapter = null
         _sortSpinnerAdapter = null
     }
 
@@ -137,10 +137,10 @@ class PopularRatesFragment : Fragment() {
                         )
                         binding.loading.visibility = View.GONE
                         binding.error.visibility = View.GONE
-                        binding.popularRatesRecyclerView.visibility = View.VISIBLE
+                        binding.popularRateRecyclerView.visibility = View.VISIBLE
                     }
                     is ApiState.Loading -> {
-                        binding.popularRatesRecyclerView.visibility = View.GONE
+                        binding.popularRateRecyclerView.visibility = View.GONE
                         binding.loading.visibility = View.VISIBLE
                         binding.error.visibility = View.GONE
                     }
@@ -150,7 +150,7 @@ class PopularRatesFragment : Fragment() {
                         binding.error.visibility = View.VISIBLE
                     }
                     is ApiState.Empty -> {
-                        binding.popularRatesRecyclerView.visibility = View.INVISIBLE
+                        binding.popularRateRecyclerView.visibility = View.INVISIBLE
                         binding.loading.visibility = View.GONE
                         binding.error.visibility = View.GONE
                     }

@@ -11,13 +11,13 @@ import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import com.example.currencyratetracking.R
 import com.example.currencyratetracking.databinding.FragmentFavouriteRatesBinding
 import com.example.currencyratetracking.ui.RatesViewModel
-import com.example.currencyratetracking.utils.Currency
-import com.example.currencyratetracking.utils.SortOption
+import com.example.currencyratetracking.util.Code
+import com.example.currencyratetracking.util.SortOption
 
 class FavouriteRatesFragment : Fragment() {
 
-    private var _ratesSpinnerAdapter: ArrayAdapter<String>? = null
-    private val ratesSpinnerAdapter: ArrayAdapter<String> get() = _ratesSpinnerAdapter!!
+    private var _rateSpinnerAdapter: ArrayAdapter<String>? = null
+    private val rateSpinnerAdapter: ArrayAdapter<String> get() = _rateSpinnerAdapter!!
 
     private var _sortSpinnerAdapter: ArrayAdapter<String>? = null
     private val sortSpinnerAdapter: ArrayAdapter<String>  get() = _sortSpinnerAdapter!!
@@ -38,12 +38,12 @@ class FavouriteRatesFragment : Fragment() {
         _binding = FragmentFavouriteRatesBinding.inflate(inflater, container, false)
         _adapter = FavouriteRatesAdapter()
 
-        _ratesSpinnerAdapter = ArrayAdapter(
+        _rateSpinnerAdapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_spinner_item,
-            Currency.getCodes(requireContext())
+            Code.getCodes(requireContext())
         )
-        binding.favouriteRatesSpinner.adapter = ratesSpinnerAdapter
+        binding.favouriteRateSpinner.adapter = rateSpinnerAdapter
 
         _sortSpinnerAdapter = ArrayAdapter(
             requireContext(),
@@ -52,7 +52,7 @@ class FavouriteRatesFragment : Fragment() {
         )
         binding.favouriteSortSpinner.adapter = sortSpinnerAdapter
 
-        val recyclerView = binding.favouriteRatesRecyclerView
+        val recyclerView = binding.favouriteRateRecyclerView
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
         return binding.root
@@ -61,10 +61,10 @@ class FavouriteRatesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.favouriteRatesSpinner.onItemSelectedListener =
+        binding.favouriteRateSpinner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                    favouriteRatesViewModel.getFilteredFavouriteRates(ratesSpinnerAdapter.getItem(p2).toString())
+                    favouriteRatesViewModel.getFilteredFavouriteRates(rateSpinnerAdapter.getItem(p2).toString())
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -92,7 +92,7 @@ class FavouriteRatesFragment : Fragment() {
         super.onDestroyView()
         _binding = null
         _adapter = null
-        _ratesSpinnerAdapter = null
+        _rateSpinnerAdapter = null
         _sortSpinnerAdapter = null
     }
 }

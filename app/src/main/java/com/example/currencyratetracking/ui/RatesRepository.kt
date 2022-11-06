@@ -6,7 +6,7 @@ import com.example.currencyratetracking.datamodels.FavouriteRateDB
 import com.example.currencyratetracking.data.local.FavouriteRatesDao
 import com.example.currencyratetracking.datamodels.RateApiResponse
 import com.example.currencyratetracking.data.remote.RatesRemoteData
-import com.example.currencyratetracking.utils.SortOption
+import com.example.currencyratetracking.util.SortOption
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

@@ -1,13 +1,13 @@
-package com.example.currencyratetracking.utils
+package com.example.currencyratetracking.util
 
 import android.content.Context
 import com.example.currencyratetracking.R
 
 enum class SortOption {
-    BY_RATE_ASC,
-    BY_RATE_DESC,
     BY_CODE_ASC,
-    BY_CODE_DESC;
+    BY_CODE_DESC,
+    BY_RATE_ASC,
+    BY_RATE_DESC;
 
     companion object {
 
@@ -21,13 +21,7 @@ enum class SortOption {
         }
 
         fun getSortOption(id: Int): SortOption {
-            return when (id) {
-                0 -> BY_CODE_ASC
-                1 -> BY_CODE_DESC
-                2 -> BY_RATE_ASC
-                3 -> BY_RATE_DESC
-                else -> BY_CODE_ASC
-            }
+            return values()[id]
         }
     }
 }

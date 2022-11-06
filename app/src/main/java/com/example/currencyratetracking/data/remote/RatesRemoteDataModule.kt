@@ -13,18 +13,18 @@ import javax.inject.Singleton
 object RatesRemoteDataModule {
 
     @Provides
-    fun providesBaseUrl(): String = "https://api.exchangerate.host/"
+    fun provideBaseUrl(): String = "https://api.exchangerate.host/"
 
     @Provides
     @Singleton
-    fun providesRetrofit(BASE_URL: String): Retrofit = Retrofit.Builder()
+    fun provideRetrofit(BASE_URL: String): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
     @Provides
     @Singleton
-    fun providesRatesService(retrofit: Retrofit): RatesService = retrofit.create(RatesService::class.java)
+    fun provideRatesService(retrofit: Retrofit): RatesService = retrofit.create(RatesService::class.java)
 
     @Provides
     @Singleton

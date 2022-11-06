@@ -1,9 +1,9 @@
-package com.example.currencyratetracking.utils
+package com.example.currencyratetracking.util
 
 import android.content.Context
 import com.example.currencyratetracking.R
 
-class Currency {
+class Code {
 
     companion object {
 

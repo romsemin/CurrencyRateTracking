@@ -7,7 +7,7 @@
     tools:context=".ui.favourite.FavouriteRatesFragment">
 
     <Spinner
-        android:id="@+id/favourite_rates_spinner"
+        android:id="@+id/favourite_rate_spinner"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/spinner_height"
         app:layout_constraintHorizontal_weight="1"
@@ -22,16 +22,16 @@
         app:layout_constraintHorizontal_weight="1"
         android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/favourite_rates_spinner"/>
+        app:layout_constraintTop_toTopOf="@id/favourite_rate_spinner"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/favourite_rates_recycler_view"
+        android:id="@+id/favourite_rate_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/rates_item"
+        tools:listitem="@layout/rate_item"
         android:layout_marginTop="@dimen/recycler_margin_top"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/favourite_rates_spinner"
+        app:layout_constraintTop_toBottomOf="@id/favourite_rate_spinner"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

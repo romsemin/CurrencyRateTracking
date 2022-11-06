@@ -3,8 +3,8 @@ package com.example.currencyratetracking.ui
 import androidx.lifecycle.*
 import com.example.currencyratetracking.datamodels.FavouriteRateDB
 import com.example.currencyratetracking.datamodels.Rate
-import com.example.currencyratetracking.utils.ApiState
-import com.example.currencyratetracking.utils.SortOption
+import com.example.currencyratetracking.util.ApiState
+import com.example.currencyratetracking.util.SortOption
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope

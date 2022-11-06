@@ -1,4 +1,4 @@
-package com.example.currencyratetracking.utils
+package com.example.currencyratetracking.util
 
 import com.example.currencyratetracking.datamodels.RateApiResponse
 
