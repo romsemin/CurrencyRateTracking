@@ -13,13 +13,13 @@ import javax.inject.Singleton
 object FavouriteRatesDatabaseModule {
 
     @Provides
-    fun provideFavRatesDao(favouriteRatesRoomDatabase: FavouriteRatesRoomDatabase): FavouriteRatesDao {
+    fun provideFavouriteRatesDao(favouriteRatesRoomDatabase: FavouriteRatesRoomDatabase): FavouriteRatesDao {
         return favouriteRatesRoomDatabase.favouriteRatesDao()
     }
 
     @Provides
     @Singleton
-    fun provideFavRatesDatabase(@ApplicationContext appContext: Context): FavouriteRatesRoomDatabase {
+    fun provideFavouriteRatesDatabase(@ApplicationContext appContext: Context): FavouriteRatesRoomDatabase {
         return FavouriteRatesRoomDatabase.getDatabase(appContext)
 
     }

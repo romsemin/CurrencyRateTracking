@@ -9,9 +9,8 @@ import com.example.currencyratetracking.R
 import com.example.currencyratetracking.datamodels.Rate
 import com.example.currencyratetracking.databinding.RatesItemBinding
 
-class PopularRatesAdapter(
-    private val onClickListener: OnClickListener
-) : ListAdapter<Rate, PopularRatesAdapter.RatesViewHolder>(RatesDiffUtil) {
+class PopularRatesAdapter(private val onClickListener: OnClickListener) :
+    ListAdapter<Rate, PopularRatesAdapter.RatesViewHolder>(RatesDiffUtil) {
     private var ratesList : MutableList<Rate> = mutableListOf()
 
     companion object RatesDiffUtil : DiffUtil.ItemCallback<Rate>() {
@@ -56,13 +55,11 @@ class PopularRatesAdapter(
         fun bind(item: Rate) {
             binding.ratesItemCode.text = item.code
             binding.ratesItemRate.text = item.rate.toString()
-            binding.ratesItemIcon.setImageResource(R.drawable.ic_baseline_star_outline_24)
+            binding.ratesItemIcon.setImageResource(R.drawable.ic_baseline_star_outline)
         }
     }
 
-    class OnClickListener(
-        val clickListener: (rate: Rate) -> Unit
-    ) {
+    class OnClickListener(val clickListener: (rate: Rate) -> Unit) {
         fun onClick(rate: Rate) = clickListener(rate)
     }
 }

@@ -6,11 +6,10 @@
     <string name="title_favourite">Favourite currency rates</string>
 
     <!--Sort Options-->
-    <string name="none">Not sorted</string>
-    <string name="by_rate">By rate ASC</string>
-    <string name="by_rate_descending">By rate DESC</string>
-    <string name="by_code">By code ASC</string>
+    <string name="by_code_ascending">By code ASC</string>
     <string name="by_code_descending">By code DESC</string>
+    <string name="by_rate_ascending">By rate ASC</string>
+    <string name="by_rate_descending">By rate DESC</string>
 
     <!--Currencies-->
     <string name="cad">CAD</string>

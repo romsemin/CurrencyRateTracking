@@ -31,7 +31,6 @@ class FavouriteRatesAdapter : ListAdapter<FavouriteRateDB, FavouriteRatesAdapter
     }
 
     override fun onCreateViewHolder(
-
         parent: ViewGroup,
         viewType: Int
     ): RatesViewHolder {
@@ -57,7 +56,7 @@ class FavouriteRatesAdapter : ListAdapter<FavouriteRateDB, FavouriteRatesAdapter
         fun bind(item: FavouriteRateDB) {
             binding.ratesItemCode.text = item.code
             binding.ratesItemRate.text = item.rate.toString()
-            binding.ratesItemIcon.setImageResource(R.drawable.ic_baseline_star_rate_24)
+            binding.ratesItemIcon.setImageResource(R.drawable.ic_baseline_star_rate)
         }
     }
 }

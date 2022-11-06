@@ -35,16 +35,14 @@ class PopularRatesFragment : Fragment() {
     private var _adapter: PopularRatesAdapter? = null
     private val adapter: PopularRatesAdapter get() = _adapter!!
 
-    private val popularRatesViewModel: RatesViewModel by hiltNavGraphViewModels(R.id.mobile_navigation)
+    private val popularRatesViewModel: RatesViewModel by hiltNavGraphViewModels(R.id.rates_navigation)
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentPopularRatesBinding.inflate(inflater, container, false)
-
         _adapter = PopularRatesAdapter(PopularRatesAdapter.OnClickListener {
             popularRatesViewModel.insert(
                 FavouriteRateDB(
@@ -134,7 +132,8 @@ class PopularRatesFragment : Fragment() {
                     is ApiState.Success -> {
                         popularRatesViewModel.ratesLiveData.postValue(
                             mapApiResponseToAdapterData(
-                                it.data)
+                                it.data,
+                            SortOption.BY_CODE_ASC)
                         )
                         binding.loading.visibility = View.GONE
                         binding.error.visibility = View.GONE
@@ -162,7 +161,7 @@ class PopularRatesFragment : Fragment() {
 
     fun mapApiResponseToAdapterData(
         response: RateApiResponse,
-        sortOption: SortOption? = SortOption.NONE
+        sortOption: SortOption
     ): List<Rate> {
         val adapterList = mutableListOf<Rate>()
         for (rate in response.rates) {
@@ -173,7 +172,6 @@ class PopularRatesFragment : Fragment() {
             SortOption.BY_RATE_DESC -> adapterList.sortedByDescending { it.rate }
             SortOption.BY_CODE_ASC -> adapterList.sortedBy { it.code }
             SortOption.BY_CODE_DESC -> adapterList.sortedByDescending { it.code }
-            else -> adapterList
         }
     }
 }

@@ -28,14 +28,13 @@ class FavouriteRatesFragment : Fragment() {
     private var _adapter: FavouriteRatesAdapter? = null
     private val adapter: FavouriteRatesAdapter get() = _adapter!!
 
-    private val favouriteRatesViewModel: RatesViewModel by hiltNavGraphViewModels(R.id.mobile_navigation)
+    private val favouriteRatesViewModel: RatesViewModel by hiltNavGraphViewModels(R.id.rates_navigation)
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentFavouriteRatesBinding.inflate(inflater, container, false)
         _adapter = FavouriteRatesAdapter()
 
@@ -61,7 +60,6 @@ class FavouriteRatesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         binding.favouriteRatesSpinner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {

@@ -39,7 +39,6 @@ class RatesRepository @Inject constructor(
                 SortOption.BY_RATE_DESC -> ratesDB.postValue(favouriteRatesDao.sortByRateDesc())
                 SortOption.BY_CODE_ASC -> ratesDB.postValue(favouriteRatesDao.sortByCodeAsc())
                 SortOption.BY_CODE_DESC -> ratesDB.postValue(favouriteRatesDao.sortByCodeDesc())
-                else -> ratesDB.postValue(favouriteRatesDao.getFavouriteRates())
             }
         }
     }

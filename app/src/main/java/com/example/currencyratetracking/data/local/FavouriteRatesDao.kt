@@ -10,7 +10,7 @@ import com.example.currencyratetracking.datamodels.FavouriteRateDB
 interface FavouriteRatesDao {
 
     @Query("SELECT * FROM favourite_rates_table")
-    fun getFavouriteRates(): List<FavouriteRateDB>
+    fun getAll(): List<FavouriteRateDB>
 
     @Query("DELETE FROM favourite_rates_table")
     suspend fun deleteAll()
