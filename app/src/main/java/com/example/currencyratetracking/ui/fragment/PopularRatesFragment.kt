@@ -44,9 +44,7 @@ class PopularRatesFragment : Fragment() {
     ): View {
         _binding = FragmentPopularRatesBinding.inflate(inflater, container, false)
         _adapter = RatesAdapter(RatesAdapter.OnClickListener {
-            ratesViewModel.insert(
-                Rate(it.code, it.rate)
-            )
+            ratesViewModel.insert(it)
         })
 
         _rateSpinnerAdapter = ArrayAdapter(
